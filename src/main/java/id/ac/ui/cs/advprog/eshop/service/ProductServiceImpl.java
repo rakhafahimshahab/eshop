@@ -17,7 +17,25 @@ public class ProductServiceImpl implements ProductService {
         productRepository.create(product);
         return product;
     }
+    public Product get(String id) {
+        Product product = null;
+        Iterator<Product> products = productRepository.findAll();
+        while (products.hasNext()) {
+            Product cur = products.next();
+            if (cur.getProductId().equals(id)){
+                product = cur;
+                break;
+            }
+        }
+        return product;
+    }
 
+    @Override
+    public void edit(Product product) {
+        if (product.getProductQuantity() > 0) {
+            productRepository.edit(product);
+        }
+    }
     @Override
     public List<Product> findAll() {
         Iterator<Product> productIterator = productRepository.findAll();
