@@ -35,9 +35,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void edit(Product product) {
-        if (product.getProductQuantity() > 0) {
-            productRepository.edit(product);
-        }
+        productRepository.edit(product);
     }
     @Override
     public List<Product> findAll() {
