@@ -39,6 +39,13 @@ public class ProductController {
         return "redirect:list";
     }
 
+    @GetMapping("/delete/{id}")
+    public String deletePost(@PathVariable String id) {
+        Product product = service.get(id);
+        service.delete(product);
+        return "redirect:/product/list";
+    }
+
     @GetMapping("/list")
     public String productListPage(Model model) {
         List<Product> allProducts = service.findAll();
