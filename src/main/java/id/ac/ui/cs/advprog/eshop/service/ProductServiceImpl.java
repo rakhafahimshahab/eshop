@@ -36,11 +36,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void edit(Product product) {
         productRepository.edit(product);
+
     }
     public void delete(Product product){
         if (product != null) {
             productRepository.delete(product);
         }
+
     }
     @Override
     public List<Product> findAll() {
