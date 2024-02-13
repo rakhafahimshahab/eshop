@@ -21,7 +21,7 @@ import org.mockito.Mockito;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @WebMvcTest(ProductController.class)
-public class ProductControllerTest {
+class ProductControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -39,7 +39,7 @@ public class ProductControllerTest {
 
 
     @Test
-    public void createProductPost_ShouldCreateProductAndRedirect() throws Exception {
+    void createProductPost_ShouldCreateProductAndRedirect() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/product/create")
                         .param("name", "Test Product")
                         .param("price", "100.0"))
@@ -52,7 +52,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void editProductPage_ShouldDisplayEditProductPage() throws Exception {
+    void editProductPage_ShouldDisplayEditProductPage() throws Exception {
         Product product = new Product(); // Assume this is your product object
         BDDMockito.given(productService.get("1")).willReturn(product);
 
@@ -63,7 +63,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void editProductPost_ShouldEditProductAndRedirect() throws Exception {
+    void editProductPost_ShouldEditProductAndRedirect() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/product/edit")
                         .param("id", "1")
                         .param("name", "Updated Product")
@@ -76,7 +76,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void deleteProduct_ShouldDeleteProductAndRedirect() throws Exception {
+    void deleteProduct_ShouldDeleteProductAndRedirect() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/product/delete/1"))
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/product/list"));

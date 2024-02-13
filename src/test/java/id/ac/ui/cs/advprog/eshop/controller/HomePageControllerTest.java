@@ -9,7 +9,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @WebMvcTest(HomePageController.class)
-public class HomePageControllerTest {
+class HomePageControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -19,7 +19,7 @@ public class HomePageControllerTest {
     }
 
     @Test
-    public void testHomePage() throws Exception {
+    void testHomePage() throws Exception {
         mockMvc.perform(get(""))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("HomePage"));

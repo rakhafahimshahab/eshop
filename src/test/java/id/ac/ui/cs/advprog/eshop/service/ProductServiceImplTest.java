@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.Assertions;
 import java.util.Collections;
 
-public class ProductServiceImplTest {
+class ProductServiceImplTest {
 
     @Mock
     private ProductRepository productRepository;
