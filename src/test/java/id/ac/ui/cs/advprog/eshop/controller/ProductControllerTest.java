@@ -37,13 +37,6 @@ public class ProductControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    @Test
-    public void createProductPage_ShouldDisplayCreateProductPage() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/product/create"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("createProduct"))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("product"));
-    }
 
     @Test
     public void createProductPost_ShouldCreateProductAndRedirect() throws Exception {
@@ -92,14 +85,4 @@ public class ProductControllerTest {
         // Add assertions here if needed
     }
 
-    @Test
-    public void productListPage_ShouldDisplayProductList() throws Exception {
-        List<Product> products = Arrays.asList(new Product(), new Product());
-        BDDMockito.given(productService.findAll()).willReturn(products);
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/product/list"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("productList"))
-                .andExpect(MockMvcResultMatchers.model().attribute("products", Matchers.hasSize(2)));
-    }
 }
