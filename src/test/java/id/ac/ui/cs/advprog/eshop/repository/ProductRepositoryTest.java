@@ -120,5 +120,36 @@ class ProductRepositoryTest {
         // Ensure no additional products were mistakenly removed
         assertFalse(productIterator.hasNext());
     }
+    @Test
+    void editProductThatDoesNotExistShouldNotModifyRepository() {
+        // Setup: Create a product and add it to the repository
+        Product existingProduct = new Product();
+        existingProduct.setProductId("existing-id");
+        existingProduct.setProductName("Existing Product");
+        productRepository.create(existingProduct);
+
+        // Attempt to edit a product with a different ID
+        Product nonExistingProduct = new Product();
+        nonExistingProduct.setProductId("non-existing-id");
+        nonExistingProduct.setProductName("Non Existing Product");
+        productRepository.edit(nonExistingProduct);
+
+        // Verify the repository is unchanged
+        Iterator<Product> iterator = productRepository.findAll();
+        Product result = iterator.next();
+        assertEquals("existing-id", result.getProductId(), "Repository should contain the original product");
+        assertFalse(iterator.hasNext(), "Repository should not contain any additional products");
+    }
+
+    @Test
+    void editEmptyRepositoryShouldRemainUnchanged() {
+        // Attempt to edit a product when the repository is empty
+        Product product = new Product();
+        product.setProductId("some-id");
+        productRepository.edit(product);
+
+        // Verify the repository remains empty
+        assertFalse(productRepository.findAll().hasNext(), "Repository should remain empty");
+    }
 
 }
