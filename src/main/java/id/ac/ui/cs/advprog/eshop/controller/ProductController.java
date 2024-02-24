@@ -57,16 +57,16 @@ public class ProductController {
     }
 }
 @Controller
-@RequestMapping ("/car")
+@RequestMapping("/car")
 class CarController extends ProductController {
     @Autowired
     private CarServiceImpl carservice;
 
-    @GetMapping(" /createCar")
+    @GetMapping("/createCar")
     public String createCarPage(Model model) {
         Car car = new Car();
         model.addAttribute("car", car);
-        return "CreateCar";
+        return "createCar";
     }
 
     @PostMapping("/createCar")
@@ -79,20 +79,21 @@ class CarController extends ProductController {
     public String carListPage(Model model) {
         List<Car> allCars = carservice.findAll();
         model.addAttribute("cars", allCars);
-        return "CarList";
+        return "carList";
     }
 
     @GetMapping("/editCar/{carId}")
     public String editCarPage(@PathVariable String carId, Model model) {
         Car car = carservice.findById(carId);
         model.addAttribute("car", car);
-        return "EditCar";
+        return "editCar";
     }
 
     @PostMapping("/editCar")
     public String editCarPost(@ModelAttribute Car car, Model model) {
         System.out.println(car.getCarId());
         carservice.update(car.getCarId(), car);
+
         return "redirect:listCar";
     }
 
